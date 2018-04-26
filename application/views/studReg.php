@@ -58,6 +58,7 @@
 					
 					<div class="form-left-w3l">
 						<input name="roll" type="text" placeholder="Roll Number" required="">
+                        <input name="acc" type="text" placeholder="Account Number" required="">
 						<input type="text" name="class" placeholder="Class" required="">
 						<input type="text" name="address" placeholder="Address" required="">
 						<div class="clear"></div>

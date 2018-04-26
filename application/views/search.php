@@ -36,12 +36,12 @@
 			<div class="information">
 				<div class="main">
 					<div class="form-left-w3l">
-						<input name="roll" type="text" placeholder="Roll Number" required="">
+						<input name="acc" type="text" placeholder="Account Number" required="">
 						<div class="clear"></div>
 					</div>
 				</div>
 			</div>
-            <input type="submit" name="submit" value="Search by Roll Number">
+            <input type="submit" name="submit" value="Search by Account Number">
 		</form>
         <!--	search by class	-->
         <form action="<?=base_url('index.php/student/findStudentClass')?>" method="post">

@@ -42,6 +42,9 @@
     <div class="row">
         <h2>Student Details</h2>
     </div>
+    <?php
+    foreach($return->result() as $row){
+    ?>
     <div class="row">
         <fieldset class="for-panel">
             <legend>Indian Public School</legend>
@@ -49,32 +52,35 @@
                 <div class="col-sm-6">
                     <div class="form-horizontal">
                         <label class="col-xs-4 control-label">Student Name:</label>
-                        <p class="form-control-static"><?= $NAME ?></p>
+                        <p class="form-control-static"><?= $row->NAME ?></p>
                         <label class="col-xs-4 control-label">Roll Number: </label>
-                        <p class="form-control-static" id="rollnumb"><?= $ROLL ?></p>
+                        <p class="form-control-static" id="rollnumb"><?= $row->ROLL ?></p>
+                        <label class="col-xs-4 control-label">Account Number:</label>
+                        <p class="form-control-static" id="acc"><?= $row->ACCOUNT ?></p>
                         <label class="col-xs-4 control-label">Class: </label>
-                        <p class="form-control-static"><?= $CLASS ?></p>
+                        <p class="form-control-static"><?= $row->CLASS ?></p>
                         <label class="col-xs-4 control-label">Contact: </label>
-                        <p class="form-control-static"><?= $CONTACT ?></p>
+                        <p class="form-control-static"><?= $row->CONTACT ?></p>
                         <label class="col-xs-4 control-label">Conveyance: </label>
-                        <p class="form-control-static" id="conveyance"><?= $CONVEYANCE ?></p>
+                        <p class="form-control-static" id="conveyance"><?= $row->CONVEYANCE ?></p>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-horizontal">
                         <label class="col-xs-4 control-label">Father's Name:</label>
-                        <p class="form-control-static"> <?= $FNAME ?> </p>
+                        <p class="form-control-static"> <?= $row->FNAME ?> </p>
                         <label class="col-xs-4 control-label">Address: </label>
-                        <p class="form-control-static"><?= $ADDRESS ?></p>
+                        <p class="form-control-static"><?= $row->ADDRESS ?></p>
                         <label class="col-xs-4 control-label">Academic Fee: </label>
-                        <p class="form-control-static" id="acadfee"><?= $ACADFEE ?> &nbsp;&nbsp;&nbsp;(RN: <?=$RECEIPT_ACAD?>)</p>
+                        <p class="form-control-static" id="acadfee"><?= $row->ACADFEE ?> &nbsp;&nbsp;&nbsp;(RN: <?=$row->RECEIPT_ACAD?>)</p>
                         <label class="col-xs-4 control-label">Conveyance Fee: </label>
-                        <p class="form-control-static" id="convfee"><?= $CONVFEE ?>&nbsp;&nbsp;&nbsp;(RN: <?=$RECEIPT_CONV?>)</p>
+                        <p class="form-control-static" id="convfee"><?= $row->CONVFEE ?>&nbsp;&nbsp;&nbsp;(RN: <?=$row->RECEIPT_CONV?>)</p>
                     </div>
                 </div>
             </div>
         </fieldset>
     </div>
+    <?php }?>
     <button type="button" id="btn" onclick="show()" class="btn btn-primary" style="width: 20%">Update Fee</button>
 
     <form style="display: none" action="<?=base_url('index.php/Student/updateFee')?>" method="post" id="months">
@@ -83,6 +89,12 @@
         <div class="form-horizontal">
             <fieldset>
                 <legend>Academic Fee</legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasic">Enter Account Number</label>
+                    <div class="col-md-4">
+                        <input placeholder="Account Number" name="acc" type="text" class="form-control" id="usr">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectbasic">Select Last Fee Paid Month</label>
                     <div class="col-md-4">
@@ -133,10 +145,15 @@
 
     <form style="display: none" action="<?=base_url('index.php/Student/updateConvFee')?>" method="post" id="monthsC">
         <h3>Select months to update Conveyance fee</h3>
-        <input name="rollno" type="hidden" id="hiddenA" value="">
         <div class="form-horizontal">
             <fieldset>
                 <legend>Conveyance Fee</legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasic">Enter Account Number </label>
+                    <div class="col-md-4">
+                        <input placeholder="Account Number" name="acc" type="text" class="form-control" id="usr">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectbasic">Select Last Fee Paid Month</label>
                     <div class="col-md-4">

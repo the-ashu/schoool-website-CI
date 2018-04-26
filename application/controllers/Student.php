@@ -11,6 +11,7 @@ class student extends CI_Controller {
             $data['FNAME'] = $this->input->post('father', TRUE);
             $data['CONTACT'] = $this->input->post('phone', TRUE);
             $data['ROLL'] = $this->input->post('roll', TRUE);
+            $data['ACCOUNT']=$this->input->post('acc',TRUE);
             $data['CLASS'] = $this->input->post('class', TRUE);
             $data['ADDRESS'] = $this->input->post('address', TRUE);
             $data['ACADFEE'] = "No fee submitted yet";
@@ -144,10 +145,14 @@ class student extends CI_Controller {
             $mon=$this->input->post('mon');
             $year=$this->input->post('year');
             $acadDate=$mon."-".$year;
-            $roll=$this->input->post('rollno',TRUE);
+            $account=$this->input->post('acc',TRUE);
             $rec=$this->input->post('rec',TRUE);
-            $query = "UPDATE students SET CONVFEE='".$acadDate."',RECEIPT_CONV='".$rec."' WHERE ROLL='".$roll."'";
+            $data['ACCOUNT'] = $account;
+            $data['CONVFEE'] = $acadDate;
+            $data['RECEIPT_CONV'] = $rec;
+            $query = "UPDATE students SET CONVFEE='".$acadDate."',RECEIPT_CONV='".$rec."' WHERE ACCOUNT='".$account."'";
             $this->_custom_query($query);
+            $this->Passbook_model->insert($data);
             echo "<script language=\"javascript\">alert('Fee updated Successfully');</script>";
             $this->ips_admin();
         }
@@ -159,10 +164,14 @@ class student extends CI_Controller {
             $mon=$this->input->post('mon');
             $year=$this->input->post('year');
             $acadDate=$mon."-".$year;
-            $roll=$this->input->post('rollno',TRUE);
+            $account=$this->input->post('acc',TRUE);
             $rec=$this->input->post('rec',TRUE);
-            $query = "UPDATE students SET ACADFEE='".$acadDate."',RECEIPT_ACAD='".$rec."' WHERE ROLL='".$roll."'";
+            $data['ACCOUNT'] = $account;
+            $data['ACADFEE'] = $acadDate;
+            $data['RECEIPT_ACAD'] = $rec;
+            $query = "UPDATE students SET ACADFEE='".$acadDate."',RECEIPT_ACAD='".$rec."' WHERE ACCOUNT='".$account."'";
             $this->_custom_query($query);
+           $this->Passbook_model->insert($data);
             echo "<script language=\"javascript\">alert('Fee updated Successfully');</script>";
             $this->ips_admin();
         }
@@ -189,18 +198,19 @@ class student extends CI_Controller {
         public function findStudent()
     {
         $submit=$this->input->post('submit',TRUE);
-        if($submit== "Search by Roll Number")
+        if($submit== "Search by Account Number")
         {
-            $roll=$this->input->post('roll',TRUE);
-            $query = "select * from students where ROLL = '$roll'";
+            $account=$this->input->post('acc',TRUE);
+            $query = "select * from students where ACCOUNT = '$account'";
             $return = $this->_custom_query($query);
             if (sizeof($return->result())>0) {
-                foreach ($return->result() as $row) {
+              /*  foreach ($return->result() as $row) {
                     $data['id'] = $row->id;
                     $data['NAME'] = $row->NAME;
                     $data['FNAME'] = $row->FNAME;
                     $data['CONTACT'] = $row->CONTACT;
                     $data['ROLL'] = $row->ROLL;
+                    $data['ACCOUNT']=$row->ACCOUNT;
                     $data['CLASS'] = $row->CLASS;
                     $data['ADDRESS'] = $row->ADDRESS;
                     $data['ACADFEE'] = $row->ACADFEE;
@@ -209,12 +219,13 @@ class student extends CI_Controller {
                     $data['RECEIPT_CONV'] = $row->RECEIPT_CONV;
                     $data['CONVEYANCE'] = $row->CONVEYANCE;
 
-                }
+                }*/
+                $data['return']=$return;
                 $this->load->view('navbar');
                 $this->load->view('studentView', $data);
             }
             else{
-                echo "<script language=\"javascript\">alert('No such Roll Number Exist');</script>";
+                echo "<script language=\"javascript\">alert('No such Account Number Exist');</script>";
                 $this->load->view('navbar');
                 $this->load->view('search');
             }
