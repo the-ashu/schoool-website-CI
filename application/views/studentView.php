@@ -80,9 +80,17 @@
             </div>
         </fieldset>
     </div>
+        <?php $account=$row->ACCOUNT?>
     <?php }?>
-    <button type="button" id="btn" onclick="show()" class="btn btn-primary" style="width: 20%">Update Fee</button>
+    <br><br>
+    <form action="<?php echo base_url();?>index.php/Student/passbook" method="post" >
+        <input name="submit" type="submit" class="btn btn-primary" value="Show Fee Details" style="width: 20%; margin-left: 80%"/>
+        <input name="acc" type="hidden" id="hidden" value="<?php echo $account?>">
 
+    </form>
+    <input name="acc" type="hidden" id="hidden" value="">
+    <button type="button" id="btn" onclick="show()" class="btn btn-primary" style="width: 20%">Update Fee</button>
+   <!-- <a href="<?php echo base_url();?>index.php/Student/passbook" class="btn btn-info" role="button" style="width:20%">Show Fee Details</a>-->
     <form style="display: none" action="<?=base_url('index.php/Student/updateFee')?>" method="post" id="months">
         <h3>Select months to update Academic fee</h3>
         <input name="rollno" type="hidden" id="hidden" value="">

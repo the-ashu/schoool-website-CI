@@ -190,10 +190,16 @@ class student extends CI_Controller {
             $this->load->view('navbar');
             $this->load->view('unpaidFee',$data);
         }
-
-
-
-
+    }
+    public function passbook()
+    {
+            $account=$this->input->post('acc',TRUE);
+            $query = "select * from passbook  where ACCOUNT='".$account."'";
+            $return = $this->_custom_query($query);
+            $data['return']=$return;
+//      echo "<pre>";print_r($return->result());
+            $this->load->view('navbar');
+            $this->load->view('passbook',$data);
     }
         public function findStudent()
     {
